@@ -12,6 +12,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI endGameMessage;
 
     private int tryCount;
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+    }
+
     public void StartGame()
     {
         levelManager.GenerateLevel();
