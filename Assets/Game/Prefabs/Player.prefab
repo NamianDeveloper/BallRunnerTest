@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6a390c2392ea74da22b06e97dd0da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minYpos: -2
+  maxYpos: 5
 --- !u!54 &8617598134249055270
 Rigidbody:
   m_ObjectHideFlags: 0

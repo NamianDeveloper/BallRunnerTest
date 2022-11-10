@@ -31,10 +31,10 @@ public class LevelManager : MonoBehaviour
 
         foreach (Transform part in levelPull)
         {
-            part.transform.position -= new Vector3(0, 0, LevelSpeed);
+            part.transform.position -= new Vector3(0, 0, LevelSpeed); //Персонаж стоит на месте, двигается в его сторону уровень. Иначе персонаж может выйти за пределы инта и сломать уровень
         }
 
-        if (levelPull[0].transform.position.z <= -17) DestroyPart(levelPull[0]);
+        if (levelPull[0].transform.position.z <= -17) DestroyPart(levelPull[0]); //Когда чанк уходит за игрока, он удаляется
     }
 
     public void GenerateLevel()
@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
         timeManager.StartTimer();
     }
 
-    public void DestroyLevel()
+    public void DestroyLevel() //При проигрыше уничтожить уровень и персонажа
     {
         for (int i = levelPull.Count - 1; i > -1; i--)
         {
@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
         Destroy(player.gameObject);
     }
 
-    private void DestroyPart(Transform part)
+    private void DestroyPart(Transform part) //При унчитожении чанка добавляетя новый
     {
         levelPull.Remove(part);
         Destroy(part.gameObject);
@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
 
     private void CreateNewPart()
     {
-        Vector3 addPartPosition = levelPull.Count == 0
+        Vector3 addPartPosition = levelPull.Count == 0 //Заспаунить за последним блоком, если такого нет - вначале
             ? pullParent.transform.position
             : levelPull.Last().transform.position + new Vector3(0, 0, addZpos);
 
@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
             new Quaternion(),
             pullParent);
 
-        if(levelPull.Count > 2) createPart.GetComponent<GenerateBlock>().GenerateBarrier();
+        if(levelPull.Count > 2) createPart.GetComponent<GenerateBlock>().GenerateBarrier(); //Первые 2 чанка без препятствий
         levelPull.Add(createPart.transform);
     }
 

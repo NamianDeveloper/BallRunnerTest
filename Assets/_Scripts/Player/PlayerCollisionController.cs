@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class PlayerCollisionController : MonoBehaviour
 {
     public static UnityAction Collision;
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //При соприкосновении с преградой инвокаю ивент
     {
         Collision?.Invoke();
     }

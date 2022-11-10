@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveController : MonoBehaviour
 {
+    [SerializeField] private int minYpos;
+    [SerializeField] private int maxYpos;
+    
     public static float speed;
     
     private Rigidbody _rigidbody;
@@ -23,7 +26,7 @@ public class PlayerMoveController : MonoBehaviour
         
         float addValueY = Input.GetKey(KeyCode.W) ? speed : -speed - 0.03f;
 
-        Vector3 finaly = new Vector3(0,Mathf.Clamp(transform .position.y +addValueY,-2 ,5), 0);
+        Vector3 finaly = new Vector3(0,Mathf.Clamp(transform .position.y +addValueY,minYpos ,maxYpos), 0);
         
          transform.position = finaly;
     }
