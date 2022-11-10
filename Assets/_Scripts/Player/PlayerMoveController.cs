@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class PlayerMoveController : MonoBehaviour
 {
+    public static float speed;
+    
     private Rigidbody _rigidbody;
 
+    private bool isCanMove = true;
     void Start()
     {
+        speed = 0.12f;
         _rigidbody = GetComponent<Rigidbody>();
+        
+        PlayerCollisionController.Collision += StopPlayer;
     }
 
     void Update()
     {
-        //if (Input.GetKey(KeyCode.W)) _rigidbody.AddForce(Vector3.up * 20);
-        //Vector3 addValue = Input.GetKey(KeyCode.W) ? new Vector3(0, 0.1f, 0) : new Vector3(0, -0.1f, 0);
+        if(!isCanMove) return;
         
-        float addValueY = Input.GetKey(KeyCode.W) ? 0.1f : -0.1f;
+        float addValueY = Input.GetKey(KeyCode.W) ? speed : -speed - 0.03f;
 
         Vector3 finaly = new Vector3(0,Mathf.Clamp(transform .position.y +addValueY,-2 ,5), 0);
         
          transform.position = finaly;
     }
+
+    private void StopPlayer() => isCanMove = false;
 }
